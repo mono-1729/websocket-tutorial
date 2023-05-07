@@ -7,7 +7,7 @@
 //-----------------------------------------------
 // モジュール
 //-----------------------------------------------
-const crypto = require("crypto");
+import { createHash } from "crypto";
 const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
@@ -16,7 +16,7 @@ const io = require("socket.io")(http);
 // 定数
 //-----------------------------------------------
 // HTMLやJSなどを配置するディレクトリ
-const DOCUMENT_ROOT = __dirname + "/public";
+const DOCUMENT_ROOT = __dirname ;
 
 // トークンを作成する際の秘密鍵
 const SECRET_TOKEN = "abcdefghijklmn12345";
@@ -168,7 +168,7 @@ http.listen(3000, () => {
  */
 function makeToken(id) {
   const str = SECRET_TOKEN + id;
-  return crypto.createHash("sha1").update(str).digest("hex");
+  return createHash("sha1").update(str).digest("hex");
 }
 
 /**
